@@ -1,0 +1,91 @@
+{
+  "name": "bsv-language-server",
+  "displayName": "BSV Language Server",
+  "description": "Bluespec SystemVerilog Language Server for VSCode",
+  "version": "0.1.0",
+  "publisher": "Jiakai Xu",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters",
+    "Formatters"
+  ],
+  "activationEvents": [
+    "onLanguage:bsv"
+  ],
+  "main": "./client/out/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "bsv",
+        "aliases": [
+          "BSV",
+          "Bluespec SystemVerilog"
+        ],
+        "extensions": [
+          ".bsv",
+          ".bs"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "bsv",
+        "scopeName": "source.bsv",
+        "path": "./syntaxes/bsv.tmLanguage.json"
+      }
+    ],
+    "configuration": {
+      "title": "BSV Language Server",
+      "properties": {
+        "bsv.languageServer.path": {
+          "type": "string",
+          "default": "",
+          "description": "Path to the BSV language server executable. If empty, the extension will try to find it."
+        },
+        "bsv.languageServer.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "description": "Traces the communication between VSCode and the language server."
+        },
+        "bsv.languageServer.enable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable/disable the BSV language server."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "bsv.restartServer",
+        "title": "BSV: Restart Language Server"
+      },
+      {
+        "command": "bsv.showOutput",
+        "title": "BSV: Show Language Server Output"
+      }
+    ]
+  },
+  "scripts": {
+    "compile": "tsc -p ./client",
+    "watch": "tsc -watch -p ./client",
+    "vscode:prepublish": "npm run compile"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.9.3",
+    "vscode-languageclient": "^9.0.0"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^9.0.0"
+  }
+}

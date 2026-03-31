@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "npm: compile",
+      "type": "shell",
+      "command": "npm run compile",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "build language server",
+      "type": "shell",
+      "command": "cargo build --release",
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "build all",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "build language server",
+        "npm: compile"
+      ],
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "BSV",
+  "scopeName": "source.bsv",
+  "patterns": [
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#comments"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#numbers"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.bsv",
+          "match": "\\b(module|interface|method|rule|function|action|actionvalue|typeclass|instance|typedef|struct|union|enum|package|import|export)\\b"
+        },
+        {
+          "name": "keyword.other.bsv",
+          "match": "\\b(let|in|if|else|case|endcase|default|begin|end|return|for|while|do|endpackage|endmodule|endinterface|endmethod|endrule|endfunction|endtypeclass|endinstance)\\b"
+        },
+        {
+          "name": "storage.type.bsv",
+          "match": "\\b(Bit|Int|UInt|Bool|Action|ActionValue|Reg|FIFO|FIFOF|BRAM)\\b"
+        }
+      ]
+    },
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.bsv",
+          "match": "//.*$"
+        },
+        {
+          "name": "comment.block.bsv",
+          "begin": "/\\*",
+          "end": "\\*/"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.bsv",
+          "begin": "\"",
+          "end": "\""
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.bsv",
+          "match": "\\b\\d+\\b"
+        }
+      ]
+    }
+  }
+}

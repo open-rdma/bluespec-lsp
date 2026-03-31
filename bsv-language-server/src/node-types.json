@@ -1,0 +1,5587 @@
+[
+  {
+    "type": "CFuncArg",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "CFuncArgs",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "CFuncArg",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "actionBlock",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "actionStmt",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "actionStmt",
+    "named": true,
+    "fields": {
+      "beginEndStmt": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "actionStmt",
+            "named": true
+          },
+          {
+            "type": "begin",
+            "named": false
+          },
+          {
+            "type": "end",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "case_expr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "&&&",
+            "named": false
+          },
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "actionStmt",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": false
+          },
+          {
+            "type": "default",
+            "named": false
+          },
+          {
+            "type": "endcase",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "matches",
+            "named": false
+          },
+          {
+            "type": "pattern",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": false
+          }
+        ]
+      },
+      "forIncr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "forInit": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "forStmt": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ";",
+            "named": false
+          },
+          {
+            "type": "actionStmt",
+            "named": true
+          },
+          {
+            "type": "for",
+            "named": false
+          }
+        ]
+      },
+      "forTest": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "ifStmt": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "actionStmt",
+            "named": true
+          },
+          {
+            "type": "condPredicate",
+            "named": true
+          },
+          {
+            "type": "else",
+            "named": false
+          },
+          {
+            "type": "if",
+            "named": false
+          }
+        ]
+      },
+      "noAction": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "noAction",
+            "named": false
+          }
+        ]
+      },
+      "varIncr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "actionBlock",
+          "named": true
+        },
+        {
+          "type": "actionStmt",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "functionCall",
+          "named": true
+        },
+        {
+          "type": "functionDef",
+          "named": true
+        },
+        {
+          "type": "methodCall",
+          "named": true
+        },
+        {
+          "type": "methodDef",
+          "named": true
+        },
+        {
+          "type": "regWrite",
+          "named": true
+        },
+        {
+          "type": "systemTaskStmt",
+          "named": true
+        },
+        {
+          "type": "varAssign",
+          "named": true
+        },
+        {
+          "type": "varDecl",
+          "named": true
+        },
+        {
+          "type": "varDeclDo",
+          "named": true
+        },
+        {
+          "type": "varDo",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "actionValueBlock",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "actionValueStmt",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "actionValueStmt",
+    "named": true,
+    "fields": {
+      "beginEndStmt": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "actionValueStmt",
+            "named": true
+          },
+          {
+            "type": "begin",
+            "named": false
+          },
+          {
+            "type": "end",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "case_expr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "&&&",
+            "named": false
+          },
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "actionValueStmt",
+            "named": true
+          },
+          {
+            "type": "case",
+            "named": false
+          },
+          {
+            "type": "default",
+            "named": false
+          },
+          {
+            "type": "endcase",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "matches",
+            "named": false
+          },
+          {
+            "type": "pattern",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": false
+          }
+        ]
+      },
+      "forIncr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "forInit": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "forStmt": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ";",
+            "named": false
+          },
+          {
+            "type": "actionValueStmt",
+            "named": true
+          },
+          {
+            "type": "for",
+            "named": false
+          }
+        ]
+      },
+      "forTest": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "ifStmt": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "actionValueStmt",
+            "named": true
+          },
+          {
+            "type": "condPredicate",
+            "named": true
+          },
+          {
+            "type": "else",
+            "named": false
+          },
+          {
+            "type": "if",
+            "named": false
+          }
+        ]
+      },
+      "varIncr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "actionValueStmt",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "functionCall",
+          "named": true
+        },
+        {
+          "type": "functionDef",
+          "named": true
+        },
+        {
+          "type": "methodCall",
+          "named": true
+        },
+        {
+          "type": "methodDef",
+          "named": true
+        },
+        {
+          "type": "regWrite",
+          "named": true
+        },
+        {
+          "type": "returnStmt",
+          "named": true
+        },
+        {
+          "type": "systemTaskStmt",
+          "named": true
+        },
+        {
+          "type": "varAssign",
+          "named": true
+        },
+        {
+          "type": "varDecl",
+          "named": true
+        },
+        {
+          "type": "varDeclDo",
+          "named": true
+        },
+        {
+          "type": "varDo",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ancestorBVIStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "clockId",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "arrayIndexes",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "attrSpec",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "attributeInstance",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attrSpec",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "attributeInstances",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attributeInstance",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "baseLiteral",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "binDigitsUnderscore",
+          "named": true
+        },
+        {
+          "type": "decDigitsUnderscore",
+          "named": true
+        },
+        {
+          "type": "hexDigitsUnderscore",
+          "named": true
+        },
+        {
+          "type": "octDigitsUnderscore",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "beginEndExpr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "expressionStmt",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "bitConcat",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "bitSelect",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "exprPrimary",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "bitWidth",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "decDigits",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "boolLiteral",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "clockId",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "condExpr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "condPredicate",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "condPredicate",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "exprOrCondPattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "constantPattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "boolLiteral",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "intLiteral",
+          "named": true
+        },
+        {
+          "type": "realLiteral",
+          "named": true
+        },
+        {
+          "type": "stringLiteral",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "decNum",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "decDigits",
+          "named": true
+        },
+        {
+          "type": "decDigitsUnderscore",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "defaultClockBVIStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "portsDef",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "defaultResetBVIStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "clockId",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "portId",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "derives",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "typeclassIde",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "displayTaskName",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "exp",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "exportDecl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "exportItem",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "exportItem",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "packageIde",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "exprOrCondPattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "exprPrimary",
+    "named": true,
+    "fields": {
+      "dont_care": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "?",
+            "named": false
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "actionBlock",
+          "named": true
+        },
+        {
+          "type": "actionValueBlock",
+          "named": true
+        },
+        {
+          "type": "beginEndExpr",
+          "named": true
+        },
+        {
+          "type": "bitConcat",
+          "named": true
+        },
+        {
+          "type": "bitSelect",
+          "named": true
+        },
+        {
+          "type": "boolLiteral",
+          "named": true
+        },
+        {
+          "type": "exprPrimary",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "functionCall",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "intLiteral",
+          "named": true
+        },
+        {
+          "type": "interfaceExpr",
+          "named": true
+        },
+        {
+          "type": "methodCall",
+          "named": true
+        },
+        {
+          "type": "parFsmStmt",
+          "named": true
+        },
+        {
+          "type": "realLiteral",
+          "named": true
+        },
+        {
+          "type": "rulesExpr",
+          "named": true
+        },
+        {
+          "type": "seqFsmStmt",
+          "named": true
+        },
+        {
+          "type": "stringLiteral",
+          "named": true
+        },
+        {
+          "type": "structExpr",
+          "named": true
+        },
+        {
+          "type": "systemFunctionCall",
+          "named": true
+        },
+        {
+          "type": "taggedUnionExpr",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "typeAssertion",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "condExpr",
+          "named": true
+        },
+        {
+          "type": "exprPrimary",
+          "named": true
+        },
+        {
+          "type": "operatorExpr",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "expressionStmt",
+    "named": true,
+    "fields": {
+      "beginEndStmt": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "begin",
+            "named": false
+          },
+          {
+            "type": "end",
+            "named": false
+          },
+          {
+            "type": "expressionStmt",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "case_expr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "&&&",
+            "named": false
+          },
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "case",
+            "named": false
+          },
+          {
+            "type": "default",
+            "named": false
+          },
+          {
+            "type": "endcase",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "expressionStmt",
+            "named": true
+          },
+          {
+            "type": "matches",
+            "named": false
+          },
+          {
+            "type": "pattern",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": false
+          }
+        ]
+      },
+      "forIncr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "forInit": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "forStmt": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ";",
+            "named": false
+          },
+          {
+            "type": "expressionStmt",
+            "named": true
+          },
+          {
+            "type": "for",
+            "named": false
+          }
+        ]
+      },
+      "forTest": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "ifStmt": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "condPredicate",
+            "named": true
+          },
+          {
+            "type": "else",
+            "named": false
+          },
+          {
+            "type": "expressionStmt",
+            "named": true
+          },
+          {
+            "type": "if",
+            "named": false
+          }
+        ]
+      },
+      "varIncr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "expressionStmt",
+          "named": true
+        },
+        {
+          "type": "functionDef",
+          "named": true
+        },
+        {
+          "type": "moduleDef",
+          "named": true
+        },
+        {
+          "type": "varDecl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "externCImport",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "CFuncArgs",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "provisos",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "externModuleImport",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "importBVIStmt",
+          "named": true
+        },
+        {
+          "type": "moduleProto",
+          "named": true
+        },
+        {
+          "type": "moduleStmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "forFsmStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "fsmStmt",
+          "named": true
+        },
+        {
+          "type": "loopBodyFsmStmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "fsmStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "actionStmt",
+          "named": true
+        },
+        {
+          "type": "forFsmStmt",
+          "named": true
+        },
+        {
+          "type": "ifFsmStmt",
+          "named": true
+        },
+        {
+          "type": "parFsmStmt",
+          "named": true
+        },
+        {
+          "type": "repeatFsmStmt",
+          "named": true
+        },
+        {
+          "type": "returnFsmStmt",
+          "named": true
+        },
+        {
+          "type": "seqFsmStmt",
+          "named": true
+        },
+        {
+          "type": "whileFsmStmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "functionBody",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "actionBlock",
+          "named": true
+        },
+        {
+          "type": "actionValueBlock",
+          "named": true
+        },
+        {
+          "type": "functionBodyStmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "functionBodyStmt",
+    "named": true,
+    "fields": {
+      "beginEndStmt": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "begin",
+            "named": false
+          },
+          {
+            "type": "end",
+            "named": false
+          },
+          {
+            "type": "functionBodyStmt",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "case_expr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "&&&",
+            "named": false
+          },
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "case",
+            "named": false
+          },
+          {
+            "type": "default",
+            "named": false
+          },
+          {
+            "type": "endcase",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "functionBodyStmt",
+            "named": true
+          },
+          {
+            "type": "matches",
+            "named": false
+          },
+          {
+            "type": "pattern",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": false
+          }
+        ]
+      },
+      "forIncr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "forInit": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "forStmt": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ";",
+            "named": false
+          },
+          {
+            "type": "for",
+            "named": false
+          },
+          {
+            "type": "functionBodyStmt",
+            "named": true
+          }
+        ]
+      },
+      "forTest": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "ifStmt": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "condPredicate",
+            "named": true
+          },
+          {
+            "type": "else",
+            "named": false
+          },
+          {
+            "type": "functionBodyStmt",
+            "named": true
+          },
+          {
+            "type": "if",
+            "named": false
+          }
+        ]
+      },
+      "varIncr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "functionBodyStmt",
+          "named": true
+        },
+        {
+          "type": "moduleDef",
+          "named": true
+        },
+        {
+          "type": "returnStmt",
+          "named": true
+        },
+        {
+          "type": "subFunctionDef",
+          "named": true
+        },
+        {
+          "type": "varAssign",
+          "named": true
+        },
+        {
+          "type": "varDecl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "functionCall",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "exprPrimary",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "functionDef",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attributeInstances",
+          "named": true
+        },
+        {
+          "type": "functionBody",
+          "named": true
+        },
+        {
+          "type": "functionProto",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "rValue",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "functionFormal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "functionProto",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "functionFormals",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "functionFormal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "functionProto",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "functionType",
+          "named": true
+        },
+        {
+          "type": "provisos",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "functionType",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binop",
+          "named": true
+        },
+        {
+          "type": "functionFormals",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ifFsmStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "fsmStmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "implicitCond",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "condPredicate",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "importBVIStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "ancestorBVIStmt",
+          "named": true
+        },
+        {
+          "type": "defaultClockBVIStmt",
+          "named": true
+        },
+        {
+          "type": "defaultResetBVIStmt",
+          "named": true
+        },
+        {
+          "type": "inoutBVIStmt",
+          "named": true
+        },
+        {
+          "type": "inputClockBVIStmt",
+          "named": true
+        },
+        {
+          "type": "inputResetBVIStmt",
+          "named": true
+        },
+        {
+          "type": "interfaceBVIStmt",
+          "named": true
+        },
+        {
+          "type": "methodBVIStmt",
+          "named": true
+        },
+        {
+          "type": "outputClockBVIStmt",
+          "named": true
+        },
+        {
+          "type": "outputResetBVIStmt",
+          "named": true
+        },
+        {
+          "type": "parameterBVIStmt",
+          "named": true
+        },
+        {
+          "type": "pathBVIStmt",
+          "named": true
+        },
+        {
+          "type": "portBVIStmt",
+          "named": true
+        },
+        {
+          "type": "sameFamilyBVIStmt",
+          "named": true
+        },
+        {
+          "type": "scheduleBVIStmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "importDecl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "importItem",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "importItem",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "packageIde",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "inoutBVIStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "clockId",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "inoutId",
+          "named": true
+        },
+        {
+          "type": "portId",
+          "named": true
+        },
+        {
+          "type": "resetId",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "inoutId",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "inputClockBVIStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "portsDef",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "inputResetBVIStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "clockId",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "portId",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "intLiteral",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "sizedIntLiteral",
+          "named": true
+        },
+        {
+          "type": "unsizedIntLiteral",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "interfaceBVIMembDecl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "interfaceBVIStmt",
+          "named": true
+        },
+        {
+          "type": "methodBVIStmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "interfaceBVIStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "interfaceBVIMembDecl",
+          "named": true
+        },
+        {
+          "type": "typeDefType",
+          "named": true
+        },
+        {
+          "type": "typeIde",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "interfaceDecl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attributeInstance",
+          "named": true
+        },
+        {
+          "type": "interfaceMemberDecl",
+          "named": true
+        },
+        {
+          "type": "typeDefType",
+          "named": true
+        },
+        {
+          "type": "typeIde",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "interfaceExpr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "interfaceStmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "interfaceMemberDecl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "methodProto",
+          "named": true
+        },
+        {
+          "type": "subinterfaceDecl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "interfaceStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expressionStmt",
+          "named": true
+        },
+        {
+          "type": "methodDef",
+          "named": true
+        },
+        {
+          "type": "subinterfaceDef",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "lValue",
+    "named": true,
+    "fields": {
+      "lValueFunctionCall": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "arrayIndexes",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "lValue",
+          "named": true
+        },
+        {
+          "type": "tupleBind",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "loopBodyFsmStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "fsmStmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "memberBind",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "methodBVIStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "clockId",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "portId",
+          "named": true
+        },
+        {
+          "type": "resetId",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "methodCall",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "exprPrimary",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "methodDef",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "actionStmt",
+          "named": true
+        },
+        {
+          "type": "actionValueStmt",
+          "named": true
+        },
+        {
+          "type": "functionBody",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "implicitCond",
+          "named": true
+        },
+        {
+          "type": "methodFormals",
+          "named": true
+        },
+        {
+          "type": "rValue",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "typeFormals",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "methodFormal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "methodFormals",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "methodFormal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "methodProto",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attributeInstances",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "methodProtoFormals",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "methodProtoFormal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attributeInstances",
+          "named": true
+        },
+        {
+          "type": "functionProto",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "methodProtoFormals",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "methodProtoFormal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "moduleActualParamArg",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "moduleApp",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "moduleActualParamArg",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "moduleDef",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attributeInstances",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "moduleProto",
+          "named": true
+        },
+        {
+          "type": "moduleStmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "moduleFormalArgs",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attributeInstances",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "moduleFormalParam",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attributeInstances",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "moduleFormalParams",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "moduleFormalParam",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "moduleInst",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attributeInstances",
+          "named": true
+        },
+        {
+          "type": "lValue",
+          "named": true
+        },
+        {
+          "type": "moduleApp",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "moduleProto",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "moduleFormalArgs",
+          "named": true
+        },
+        {
+          "type": "moduleFormalParams",
+          "named": true
+        },
+        {
+          "type": "provisos",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "moduleStmt",
+    "named": true,
+    "fields": {
+      "beginEndStmt": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "begin",
+            "named": false
+          },
+          {
+            "type": "end",
+            "named": false
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "moduleStmt",
+            "named": true
+          }
+        ]
+      },
+      "case_expr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "&&&",
+            "named": false
+          },
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": "case",
+            "named": false
+          },
+          {
+            "type": "default",
+            "named": false
+          },
+          {
+            "type": "endcase",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "matches",
+            "named": false
+          },
+          {
+            "type": "moduleStmt",
+            "named": true
+          },
+          {
+            "type": "pattern",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": false
+          }
+        ]
+      },
+      "forIncr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "forInit": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "forStmt": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ";",
+            "named": false
+          },
+          {
+            "type": "for",
+            "named": false
+          },
+          {
+            "type": "moduleStmt",
+            "named": true
+          }
+        ]
+      },
+      "forTest": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
+      "ifStmt": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": "condPredicate",
+            "named": true
+          },
+          {
+            "type": "else",
+            "named": false
+          },
+          {
+            "type": "if",
+            "named": false
+          },
+          {
+            "type": "moduleStmt",
+            "named": true
+          }
+        ]
+      },
+      "varIncr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "condExpr",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "functionCall",
+          "named": true
+        },
+        {
+          "type": "functionDef",
+          "named": true
+        },
+        {
+          "type": "methodDef",
+          "named": true
+        },
+        {
+          "type": "moduleDef",
+          "named": true
+        },
+        {
+          "type": "moduleInst",
+          "named": true
+        },
+        {
+          "type": "moduleStmt",
+          "named": true
+        },
+        {
+          "type": "returnStmt",
+          "named": true
+        },
+        {
+          "type": "rule",
+          "named": true
+        },
+        {
+          "type": "subinterfaceDef",
+          "named": true
+        },
+        {
+          "type": "systemTaskStmt",
+          "named": true
+        },
+        {
+          "type": "varAssign",
+          "named": true
+        },
+        {
+          "type": "varDecl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "operatorExpr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binop",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "unop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "operatorId",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "outputClockBVIStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "portsDef",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "outputResetBVIStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "clockId",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "portId",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "overloadedDef",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "functionDef",
+          "named": true
+        },
+        {
+          "type": "functionProto",
+          "named": true
+        },
+        {
+          "type": "moduleDef",
+          "named": true
+        },
+        {
+          "type": "moduleProto",
+          "named": true
+        },
+        {
+          "type": "varDecl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "packageIde",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "packageStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "externCImport",
+          "named": true
+        },
+        {
+          "type": "externModuleImport",
+          "named": true
+        },
+        {
+          "type": "functionDef",
+          "named": true
+        },
+        {
+          "type": "interfaceDecl",
+          "named": true
+        },
+        {
+          "type": "lValue",
+          "named": true
+        },
+        {
+          "type": "moduleDef",
+          "named": true
+        },
+        {
+          "type": "rValue",
+          "named": true
+        },
+        {
+          "type": "typeDef",
+          "named": true
+        },
+        {
+          "type": "typeclassDef",
+          "named": true
+        },
+        {
+          "type": "typeclassInstanceDef",
+          "named": true
+        },
+        {
+          "type": "varDecl",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parFsmStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "fsmStmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "parameterBVIStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pathBVIStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "portId",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "constantPattern",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "structPattern",
+          "named": true
+        },
+        {
+          "type": "taggedUnionPattern",
+          "named": true
+        },
+        {
+          "type": "tuplePattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "portBVIStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "clockId",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "resetId",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "portId",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "portsDef",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attributeInstances",
+          "named": true
+        },
+        {
+          "type": "portId",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "proviso",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "provisos",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "proviso",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "rValue",
+    "named": true,
+    "fields": {
+      "case_expr": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "&&&",
+            "named": false
+          },
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": ":",
+            "named": false
+          },
+          {
+            "type": ";",
+            "named": false
+          },
+          {
+            "type": "case",
+            "named": false
+          },
+          {
+            "type": "default",
+            "named": false
+          },
+          {
+            "type": "endcase",
+            "named": false
+          },
+          {
+            "type": "expression",
+            "named": true
+          },
+          {
+            "type": "matches",
+            "named": false
+          },
+          {
+            "type": "pattern",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": false
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "realLiteral",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "decDigitsUnderscore",
+          "named": true
+        },
+        {
+          "type": "decNum",
+          "named": true
+        },
+        {
+          "type": "exp",
+          "named": true
+        },
+        {
+          "type": "sign",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "regWrite",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "lValue",
+          "named": true
+        },
+        {
+          "type": "rValue",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "repeatFsmStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "loopBodyFsmStmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "resetId",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "returnFsmStmt",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "returnStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "rule",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "actionStmt",
+          "named": true
+        },
+        {
+          "type": "attributeInstances",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "ruleCond",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "ruleCond",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "condPredicate",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "rulesExpr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attributeInstances",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "rulesStmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "rulesStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expressionStmt",
+          "named": true
+        },
+        {
+          "type": "rule",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sameFamilyBVIStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "clockId",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "scheduleBVIStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "operatorId",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "seqFsmStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "fsmStmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sign",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "sizedIntLiteral",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "baseLiteral",
+          "named": true
+        },
+        {
+          "type": "bitWidth",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "sourceFile",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "exportDecl",
+          "named": true
+        },
+        {
+          "type": "importDecl",
+          "named": true
+        },
+        {
+          "type": "packageIde",
+          "named": true
+        },
+        {
+          "type": "packageStmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "structExpr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "memberBind",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "structMember",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "subUnion",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "structPattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subFunctionDef",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "functionBody",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "rValue",
+          "named": true
+        },
+        {
+          "type": "subFunctionProto",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subFunctionFormal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "functionProto",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subFunctionFormals",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "subFunctionFormal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subFunctionProto",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "provisos",
+          "named": true
+        },
+        {
+          "type": "subFunctionType",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subFunctionType",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "subFunctionFormals",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subStruct",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "structMember",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subUnion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "unionMember",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subinterfaceDecl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attributeInstances",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "subinterfaceDef",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "interfaceStmt",
+          "named": true
+        },
+        {
+          "type": "rValue",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "systemFunctionCall",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "systemTaskCall",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "systemTaskStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "displayTaskName",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "systemTaskCall",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "taggedUnionExpr",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "exprPrimary",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "memberBind",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "taggedUnionPattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        },
+        {
+          "type": "structPattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tupleBind",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tuplePattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "pattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "typePrimary",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typeAssertion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bitConcat",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typeDef",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "typedefEnum",
+          "named": true
+        },
+        {
+          "type": "typedefStruct",
+          "named": true
+        },
+        {
+          "type": "typedefSynonym",
+          "named": true
+        },
+        {
+          "type": "typedefTaggedUnion",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typeDefType",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "typeFormals",
+          "named": true
+        },
+        {
+          "type": "typeIde",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typeFormal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "typePrimary",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typeFormals",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "typeFormal",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typeIde",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typeNat",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "decDigits",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typePrimary",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "functionType",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "typeIde",
+          "named": true
+        },
+        {
+          "type": "typeNat",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typeclassDef",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "overloadedDef",
+          "named": true
+        },
+        {
+          "type": "provisos",
+          "named": true
+        },
+        {
+          "type": "typeFormals",
+          "named": true
+        },
+        {
+          "type": "typeclassIde",
+          "named": true
+        },
+        {
+          "type": "typedepends",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typeclassIde",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typeclassInstanceDef",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "attributeInstances",
+          "named": true
+        },
+        {
+          "type": "moduleDef",
+          "named": true
+        },
+        {
+          "type": "provisos",
+          "named": true
+        },
+        {
+          "type": "subFunctionDef",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "typeclassIde",
+          "named": true
+        },
+        {
+          "type": "varAssign",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typedefEnum",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "derives",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "typedefEnumElements",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typedefEnumElement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "intLiteral",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typedefEnumElements",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "typedefEnumElement",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typedefStruct",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "derives",
+          "named": true
+        },
+        {
+          "type": "structMember",
+          "named": true
+        },
+        {
+          "type": "typeDefType",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typedefSynonym",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "typeDefType",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typedefTaggedUnion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "derives",
+          "named": true
+        },
+        {
+          "type": "typeDefType",
+          "named": true
+        },
+        {
+          "type": "unionMember",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typedepend",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "typelist",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typedepends",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "typedepend",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "typelist",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "typeIde",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unionMember",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "subStruct",
+          "named": true
+        },
+        {
+          "type": "subUnion",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "unsizedIntLiteral",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "baseLiteral",
+          "named": true
+        },
+        {
+          "type": "decNum",
+          "named": true
+        },
+        {
+          "type": "sign",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "varAssign",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "lValue",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        },
+        {
+          "type": "rValue",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "varDecl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "rValue",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        },
+        {
+          "type": "varInit",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "varDeclDo",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "rValue",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "varDo",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "rValue",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "varInit",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "lValue",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "whileFsmStmt",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "loopBodyFsmStmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "\"BDPI\"",
+    "named": false
+  },
+  {
+    "type": "\"BVI\"",
+    "named": false
+  },
+  {
+    "type": "#",
+    "named": false
+  },
+  {
+    "type": "$bitstoreal",
+    "named": false
+  },
+  {
+    "type": "$display",
+    "named": false
+  },
+  {
+    "type": "$displayb",
+    "named": false
+  },
+  {
+    "type": "$displayh",
+    "named": false
+  },
+  {
+    "type": "$displayo",
+    "named": false
+  },
+  {
+    "type": "$dumpoff",
+    "named": false
+  },
+  {
+    "type": "$dumpon",
+    "named": false
+  },
+  {
+    "type": "$dumpvars",
+    "named": false
+  },
+  {
+    "type": "$fclose",
+    "named": false
+  },
+  {
+    "type": "$fdisplay",
+    "named": false
+  },
+  {
+    "type": "$fdisplayb",
+    "named": false
+  },
+  {
+    "type": "$fdisplayh",
+    "named": false
+  },
+  {
+    "type": "$fdisplayo",
+    "named": false
+  },
+  {
+    "type": "$fflush",
+    "named": false
+  },
+  {
+    "type": "$fgetc",
+    "named": false
+  },
+  {
+    "type": "$finish",
+    "named": false
+  },
+  {
+    "type": "$fopen",
+    "named": false
+  },
+  {
+    "type": "$format",
+    "named": false
+  },
+  {
+    "type": "$fungetc",
+    "named": false
+  },
+  {
+    "type": "$fwrite",
+    "named": false
+  },
+  {
+    "type": "$fwriteb",
+    "named": false
+  },
+  {
+    "type": "$fwriteh",
+    "named": false
+  },
+  {
+    "type": "$fwriteo",
+    "named": false
+  },
+  {
+    "type": "$realtobits",
+    "named": false
+  },
+  {
+    "type": "$sformat",
+    "named": false
+  },
+  {
+    "type": "$sformatAV",
+    "named": false
+  },
+  {
+    "type": "$stime",
+    "named": false
+  },
+  {
+    "type": "$stop",
+    "named": false
+  },
+  {
+    "type": "$swrite",
+    "named": false
+  },
+  {
+    "type": "$swriteAV",
+    "named": false
+  },
+  {
+    "type": "$swriteb",
+    "named": false
+  },
+  {
+    "type": "$swritebAV",
+    "named": false
+  },
+  {
+    "type": "$swriteh",
+    "named": false
+  },
+  {
+    "type": "$swritehAV",
+    "named": false
+  },
+  {
+    "type": "$swriteo",
+    "named": false
+  },
+  {
+    "type": "$swriteoAV",
+    "named": false
+  },
+  {
+    "type": "$test$plusargs",
+    "named": false
+  },
+  {
+    "type": "$time",
+    "named": false
+  },
+  {
+    "type": "$write",
+    "named": false
+  },
+  {
+    "type": "$writeb",
+    "named": false
+  },
+  {
+    "type": "$writeh",
+    "named": false
+  },
+  {
+    "type": "$writeo",
+    "named": false
+  },
+  {
+    "type": "&&&",
+    "named": false
+  },
+  {
+    "type": "'",
+    "named": false
+  },
+  {
+    "type": "'0'",
+    "named": false
+  },
+  {
+    "type": "'1",
+    "named": false
+  },
+  {
+    "type": "'B",
+    "named": false
+  },
+  {
+    "type": "'D",
+    "named": false
+  },
+  {
+    "type": "'H",
+    "named": false
+  },
+  {
+    "type": "'O",
+    "named": false
+  },
+  {
+    "type": "'b",
+    "named": false
+  },
+  {
+    "type": "'d",
+    "named": false
+  },
+  {
+    "type": "'h",
+    "named": false
+  },
+  {
+    "type": "'o",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": "(*",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": "*)",
+    "named": false
+  },
+  {
+    "type": "+",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": "-",
+    "named": false
+  },
+  {
+    "type": ".",
+    "named": false
+  },
+  {
+    "type": ".*",
+    "named": false
+  },
+  {
+    "type": "..",
+    "named": false
+  },
+  {
+    "type": "0",
+    "named": false
+  },
+  {
+    "type": ":",
+    "named": false
+  },
+  {
+    "type": "::",
+    "named": false
+  },
+  {
+    "type": ";",
+    "named": false
+  },
+  {
+    "type": "<-",
+    "named": false
+  },
+  {
+    "type": "<=",
+    "named": false
+  },
+  {
+    "type": "=",
+    "named": false
+  },
+  {
+    "type": "?",
+    "named": false
+  },
+  {
+    "type": "Action",
+    "named": false
+  },
+  {
+    "type": "ActionValue",
+    "named": false
+  },
+  {
+    "type": "C",
+    "named": false
+  },
+  {
+    "type": "CF",
+    "named": false
+  },
+  {
+    "type": "E",
+    "named": false
+  },
+  {
+    "type": "False",
+    "named": false
+  },
+  {
+    "type": "SB",
+    "named": false
+  },
+  {
+    "type": "SBR",
+    "named": false
+  },
+  {
+    "type": "True",
+    "named": false
+  },
+  {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "\\",
+    "named": false
+  },
+  {
+    "type": "\\∘",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "action",
+    "named": false
+  },
+  {
+    "type": "actionvalue",
+    "named": false
+  },
+  {
+    "type": "ancestor",
+    "named": false
+  },
+  {
+    "type": "begin",
+    "named": false
+  },
+  {
+    "type": "binDigitsUnderscore",
+    "named": true
+  },
+  {
+    "type": "binop",
+    "named": true
+  },
+  {
+    "type": "bit",
+    "named": false
+  },
+  {
+    "type": "break",
+    "named": false
+  },
+  {
+    "type": "case",
+    "named": false
+  },
+  {
+    "type": "clocked_by",
+    "named": false
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "continue",
+    "named": false
+  },
+  {
+    "type": "decDigits",
+    "named": true
+  },
+  {
+    "type": "decDigitsUnderscore",
+    "named": true
+  },
+  {
+    "type": "default",
+    "named": false
+  },
+  {
+    "type": "default_clock",
+    "named": false
+  },
+  {
+    "type": "default_reset",
+    "named": false
+  },
+  {
+    "type": "dependencies",
+    "named": false
+  },
+  {
+    "type": "deriving",
+    "named": false
+  },
+  {
+    "type": "determines",
+    "named": false
+  },
+  {
+    "type": "e",
+    "named": false
+  },
+  {
+    "type": "else",
+    "named": false
+  },
+  {
+    "type": "enable",
+    "named": false
+  },
+  {
+    "type": "end",
+    "named": false
+  },
+  {
+    "type": "endaction",
+    "named": false
+  },
+  {
+    "type": "endactionvalue",
+    "named": false
+  },
+  {
+    "type": "endcase",
+    "named": false
+  },
+  {
+    "type": "endfunction",
+    "named": false
+  },
+  {
+    "type": "endinstance",
+    "named": false
+  },
+  {
+    "type": "endinterface",
+    "named": false
+  },
+  {
+    "type": "endmethod",
+    "named": false
+  },
+  {
+    "type": "endmodule",
+    "named": false
+  },
+  {
+    "type": "endpackage",
+    "named": false
+  },
+  {
+    "type": "endpar",
+    "named": false
+  },
+  {
+    "type": "endrule",
+    "named": false
+  },
+  {
+    "type": "endrules",
+    "named": false
+  },
+  {
+    "type": "endseq",
+    "named": false
+  },
+  {
+    "type": "endtypeclass",
+    "named": false
+  },
+  {
+    "type": "enum",
+    "named": false
+  },
+  {
+    "type": "export",
+    "named": false
+  },
+  {
+    "type": "for",
+    "named": false
+  },
+  {
+    "type": "function",
+    "named": false
+  },
+  {
+    "type": "hexDigitsUnderscore",
+    "named": true
+  },
+  {
+    "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "if",
+    "named": false
+  },
+  {
+    "type": "ifc_inout",
+    "named": false
+  },
+  {
+    "type": "import",
+    "named": false
+  },
+  {
+    "type": "inout",
+    "named": false
+  },
+  {
+    "type": "input_clock",
+    "named": false
+  },
+  {
+    "type": "input_reset",
+    "named": false
+  },
+  {
+    "type": "instance",
+    "named": false
+  },
+  {
+    "type": "interface",
+    "named": false
+  },
+  {
+    "type": "let",
+    "named": false
+  },
+  {
+    "type": "match",
+    "named": false
+  },
+  {
+    "type": "matches",
+    "named": false
+  },
+  {
+    "type": "method",
+    "named": false
+  },
+  {
+    "type": "module",
+    "named": false
+  },
+  {
+    "type": "noAction",
+    "named": false
+  },
+  {
+    "type": "numeric",
+    "named": false
+  },
+  {
+    "type": "octDigitsUnderscore",
+    "named": true
+  },
+  {
+    "type": "output_clock",
+    "named": false
+  },
+  {
+    "type": "output_reset",
+    "named": false
+  },
+  {
+    "type": "package",
+    "named": false
+  },
+  {
+    "type": "par",
+    "named": false
+  },
+  {
+    "type": "parameter",
+    "named": false
+  },
+  {
+    "type": "path",
+    "named": false
+  },
+  {
+    "type": "port",
+    "named": false
+  },
+  {
+    "type": "provisos",
+    "named": false
+  },
+  {
+    "type": "ready",
+    "named": false
+  },
+  {
+    "type": "repeat",
+    "named": false
+  },
+  {
+    "type": "reset_by",
+    "named": false
+  },
+  {
+    "type": "return",
+    "named": false
+  },
+  {
+    "type": "rule",
+    "named": false
+  },
+  {
+    "type": "rules",
+    "named": false
+  },
+  {
+    "type": "same_family",
+    "named": false
+  },
+  {
+    "type": "schedule",
+    "named": false
+  },
+  {
+    "type": "seq",
+    "named": false
+  },
+  {
+    "type": "string",
+    "named": false
+  },
+  {
+    "type": "stringLiteral",
+    "named": true
+  },
+  {
+    "type": "struct",
+    "named": false
+  },
+  {
+    "type": "tagged",
+    "named": false
+  },
+  {
+    "type": "type",
+    "named": false
+  },
+  {
+    "type": "typeclass",
+    "named": false
+  },
+  {
+    "type": "typedef",
+    "named": false
+  },
+  {
+    "type": "union",
+    "named": false
+  },
+  {
+    "type": "unop",
+    "named": true
+  },
+  {
+    "type": "valueOf",
+    "named": false
+  },
+  {
+    "type": "valueof",
+    "named": false
+  },
+  {
+    "type": "void",
+    "named": false
+  },
+  {
+    "type": "while",
+    "named": false
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "}",
+    "named": false
+  },
+  {
+    "type": "’",
+    "named": false
+  }
+]
