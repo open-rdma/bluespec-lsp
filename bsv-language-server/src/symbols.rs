@@ -42,23 +42,15 @@ impl Symbol {
     }
 }
 
-#[derive(Debug, Clone)]
-pub struct SymbolReference {
-    pub uri: Url,
-    pub range: Range,
-}
-
 #[derive(Debug, Default)]
 pub struct SymbolTable {
     symbols: Arc<DashMap<String, Vec<Symbol>>>,
-    references: Arc<DashMap<String, Vec<SymbolReference>>>,
 }
 
 impl SymbolTable {
     pub fn new() -> Self {
         Self {
             symbols: Arc::new(DashMap::new()),
-            references: Arc::new(DashMap::new()),
         }
     }
 
@@ -104,33 +96,7 @@ impl SymbolTable {
             .collect()
     }
 
-    pub fn add_reference(&self, symbol_name: &str, reference: SymbolReference) {
-        self.references
-            .entry(symbol_name.to_string())
-            .or_default()
-            .push(reference);
-    }
-
-    pub fn get_references(&self, symbol_name: &str) -> Vec<SymbolReference> {
-        self.references
-            .get(symbol_name)
-            .map(|refs| refs.clone())
-            .unwrap_or_default()
-    }
-
     pub fn clear_file(&self, uri: &Url) {
         self.symbols.remove(&uri.to_string());
-
-        // 清理引用
-        let uri_str = uri.to_string();
-        self.references.retain(|_, refs| {
-            refs.retain(|r| r.uri.to_string() != uri_str);
-            !refs.is_empty()
-        });
-    }
-
-    pub fn clear_all(&self) {
-        self.symbols.clear();
-        self.references.clear();
     }
 }

@@ -327,21 +327,6 @@ impl ConstantEvaluator {
         expr.parse()
             .map_err(|_| format!("Cannot evaluate: {}", expr))
     }
-
-    /// Get the raw definition of a constant
-    pub fn get_definition(&self, name: &str) -> Option<&ConstantDef> {
-        self.constants.get(name)
-    }
-
-    /// Check if a constant exists
-    pub fn has_constant(&self, name: &str) -> bool {
-        self.constants.contains_key(name)
-    }
-
-    /// Get all constant names
-    pub fn constant_names(&self) -> Vec<&str> {
-        self.constants.keys().map(|s| s.as_str()).collect()
-    }
 }
 
 #[cfg(test)]

@@ -128,16 +128,16 @@ bluespec_lsp/
 | VS Code extension client | ✅ |
 | Community health files | ✅ |
 
-### Phase 2 — Code Quality (In Progress)
+### Phase 2 — Code Quality ✅ (Completed)
 
 | Feature | Status |
 |---------|--------|
-| Dead code removal | ⏳ |
-| Unused dependency cleanup | ⏳ |
-| Deprecation fixes | ⏳ |
-| Constant expander hardening + tests | ⏳ |
-| Hex constant support + tests | ⏳ |
-| Clippy-clean codebase | ⏳ |
+| Dead code removal | ✅ |
+| Unused dependency cleanup | ✅ |
+| Deprecation fixes | ✅ |
+| Constant expander hardening + tests | ✅ |
+| Hex constant support + tests | ✅ |
+| Clippy-clean codebase | ✅ |
 
 ### Phase 3 — CI/CD
 

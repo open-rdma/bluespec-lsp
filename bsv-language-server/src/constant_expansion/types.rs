@@ -311,15 +311,6 @@ impl ExpansionResult {
             Some(numeric_args)
         }
     }
-
-    /// Format as a concise single-line summary
-    pub fn format_summary(&self) -> String {
-        if self.success {
-            format!("{} = {}", self.name, self.final_value)
-        } else {
-            format!("{} = ?", self.name)
-        }
-    }
 }
 
 /// Helper struct for operation information

@@ -3,7 +3,6 @@
 use crate::constant_expansion::types::ConstantDef;
 use lsp_types::{Position, Range};
 use regex::Regex;
-use std::collections::HashMap;
 
 /// Parser for BSV #define constant definitions
 pub struct ConstantParser {
@@ -81,14 +80,6 @@ impl ConstantParser {
 
         log::info!("Parsed {} #define constants", constants.len());
         constants
-    }
-
-    /// Parse and return as a HashMap for quick lookup
-    pub fn parse_as_map(&self, source: &str) -> HashMap<String, ConstantDef> {
-        self.parse(source)
-            .into_iter()
-            .map(|def| (def.name.clone(), def))
-            .collect()
     }
 
     /// Convert byte offset to line/column position
@@ -299,22 +290,6 @@ mod tests {
             name_start
         );
         assert_eq!(result.unwrap().name, "FOO");
-    }
-
-    #[test]
-    fn test_parse_as_map() {
-        let source = r#"
-#define 2 FOO;
-#define 10 BAR;
-"#;
-        let parser = ConstantParser::new();
-        let map = parser.parse_as_map(source);
-
-        assert_eq!(map.len(), 2);
-        assert!(map.contains_key("FOO"));
-        assert!(map.contains_key("BAR"));
-        assert_eq!(map["FOO"].value, "2");
-        assert_eq!(map["BAR"].value, "10");
     }
 }
 
