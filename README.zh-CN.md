@@ -13,17 +13,15 @@
 
 **当前已实现的功能：**
 
-| 功能 | 状态 |
+| 分类 | 功能 |
 |------|------|
-| 语法高亮 | ✅ 基础 |
-| 文档符号 | ✅ 扁平列表 |
-| 转到定义 | ✅ 同文件及跨文件 |
-| 悬停信息 | ✅ 常量展开 + 符号信息 |
-| 自动补全 | ✅ 基础关键字及本地符号 |
-| 工作区符号 | ✅ 跨所有打开的文件 |
-| 错误恢复 | ✅ 从格式错误的代码中提取符号 |
-| `#define` 常量展开 | ✅ 支持类型函数（TAdd、TSub 等） |
-| BVI / BDPI 导入语法 | ✅ 支持 |
+| 🧭 导航 | 转到定义、查找引用、文档符号、工作区符号 |
+| ℹ️ 信息 | 悬停（常量展开 + 符号信息）、诊断（语法错误报告） |
+| ✏️ 编辑 | 自动补全（关键字及本地符号）、代码折叠 |
+| ⚙️ 语言专属 | `#define` 常量展开（TAdd、TSub 等类型函数）、错误恢复 |
+| 🎨 展示 | 基础语法高亮（TextMate）、BVI / BDPI 导入语法支持 |
+
+> 完整的功能列表和规划，详见 [docs/FEATURES.md](docs/FEATURES.md)。
 
 ## 工作区内容
 
@@ -62,63 +60,14 @@ npm run compile
 3. 在新的 Extension Development Host 窗口中打开 `.bsv` 文件
 4. 尝试：悬停、自动补全（`Ctrl+Space`）、转到定义（`F12`）、文档符号（`Ctrl+Shift+O`）
 
-## 功能路线图
-
-### 阶段 1 — 基础设施 ✅
-
-| 功能 | 状态 |
-|------|------|
-| Tree-sitter BSV 语法 | ✅ |
-| Rust LSP 服务器框架 | ✅ |
-| VS Code 扩展客户端 | ✅ |
-| 社区相关文件 | ✅ |
-
-### 阶段 2 — 代码质量（进行中）
-
-| 功能 | 状态 |
-|------|------|
-| 死代码清理 | ⏳ |
-| 未使用依赖清理 | ⏳ |
-| 弃用修复 | ⏳ |
-| 常量展开器加固 + 测试 | ⏳ |
-| 十六进制常量支持 + 测试 | ⏳ |
-| Clippy 清理 | ⏳ |
-
-### 阶段 3 — CI/CD
-
-| 功能 | 状态 |
-|------|------|
-| GitHub Actions CI | ❌ |
-| 多平台发布工作流 | ❌ |
-| Dependabot 依赖更新 | ❌ |
-
-### 阶段 4 — 核心 LSP 功能
-
-| 功能 | 状态 |
-|------|------|
-| 诊断（语法错误报告） | ❌ |
-| 引用查找 | ❌ |
-| 分层文档符号 | ❌ |
-| 改进的自动补全 | ❌ |
-
-### 阶段 5 — 进阶 LSP 功能
-
-| 功能 | 状态 |
-|------|------|
-| 语义令牌 | ❌ |
-| 代码折叠 | ❌ |
-| 代码操作 | ❌ |
-| 签名帮助 | ❌ |
-| 改进 TextMate 语法 | ❌ |
-| 增量同步 | ❌ |
-
 ## 文档
 
 - [README.md](README.md) — English documentation
-- [CONTRIBUTING.md](CONTRIBUTING.md) — 贡献指南
-- [CHANGELOG.md](CHANGELOG.md) — 版本历史
-- [SECURITY.md](SECURITY.md) — 安全策略
-- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) — 行为准则
+- [FEATURES.md](docs/FEATURES.md) — 功能状态与规划
+- [CONTRIBUTING.md](docs/CONTRIBUTING.md) — 贡献指南
+- [CHANGELOG.md](docs/CHANGELOG.md) — 版本历史
+- [SECURITY.md](docs/SECURITY.md) — 安全策略
+- [CODE_OF_CONDUCT.md](docs/CODE_OF_CONDUCT.md) — 行为准则
 
 ## 许可证
 

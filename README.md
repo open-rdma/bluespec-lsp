@@ -14,19 +14,15 @@ This is a **pre-alpha** prototype with core LSP features implemented and activel
 
 **What works today:**
 
-| Feature | Status |
-|---------|--------|
-| Syntax highlighting | ✅ Basic |
-| Document symbols | ✅ Flat list |
-| Go-to-definition | ✅ Same & cross-file |
-| Hover information | ✅ Constant expansion + symbol info |
-| Completion | ✅ Basic keywords & local symbols |
-| Workspace symbols | ✅ Across all open files |
-| Error recovery | ✅ Symbol extraction from malformed code |
-| `#define` constant expansion | ✅ With type functions (TAdd, TSub, etc.) |
-| BVI / BDPI import syntax | ✅ Supported |
+| Category | Features |
+|----------|----------|
+| 🧭 Navigation | Go-to-definition, Find References, Document Symbols, Workspace Symbols |
+| ℹ️ Information | Hover (constant expansion + symbol info), Diagnostics (syntax error reporting) |
+| ✏️ Editing | Completion (keywords & local symbols), Code Folding |
+| ⚙️ Language-Specific | `#define` constant expansion with type functions (TAdd, TSub, etc.), Error recovery from malformed code |
+| 🎨 Presentation | Basic syntax highlighting (TextMate), BVI / BDPI import syntax support |
 
-**See [Feature Roadmap](#feature-roadmap) below for what's coming next.**
+> For a comprehensive list of implemented and planned features, see [docs/FEATURES.md](docs/FEATURES.md).
 
 ## Screenshots
 
@@ -74,7 +70,7 @@ npm run compile
 1. Open `bsv-language-server` in VS Code
 2. Go to **Run and Debug** → **Launch Extension**
 3. In the new Extension Development Host window, open a `.bsv` file
-4. Try: hover, completion (`Ctrl+Space`), go-to-definition (`F12`), document symbols (`Ctrl+Shift+O`)
+4. Try: hover, completion (`Ctrl+Space`), go-to-definition (`F12`), find references (`Shift+F12`), document symbols (`Ctrl+Shift+O`), syntax error diagnostics (red squiggles)
 
 ### Useful Commands
 
@@ -110,71 +106,25 @@ bluespec_lsp/
 │   ├── client/                     # VS Code extension (TypeScript)
 │   ├── syntaxes/                   # TextMate grammar for syntax highlighting
 │   └── test_fixtures/              # BSV test samples
+├── docs/                           # Documentation
+│   ├── FEATURES.md                 # Feature status and roadmap
+│   ├── CONTRIBUTING.md             # Contribution guidelines
+│   ├── CHANGELOG.md                # Version history
+│   ├── SECURITY.md                 # Security policy
+│   ├── CODE_OF_CONDUCT.md          # Contributor Covenant
+│   └── AI-ASSISTED-DEVELOPMENT.md  # Development process notes
 ├── CLAUDE.md                       # Claude Code project guide
-├── CONTRIBUTING.md                 # Contribution guidelines
-├── CODE_OF_CONDUCT.md              # Contributor Covenant
-├── SECURITY.md                     # Security policy
-└── CHANGELOG.md                    # Version history
 ```
-
-## Feature Roadmap
-
-### Phase 1 — Foundation ✅ (Completed)
-
-| Feature | Status |
-|---------|--------|
-| Tree-sitter BSV grammar | ✅ |
-| Rust LSP server framework | ✅ |
-| VS Code extension client | ✅ |
-| Community health files | ✅ |
-
-### Phase 2 — Code Quality ✅ (Completed)
-
-| Feature | Status |
-|---------|--------|
-| Dead code removal | ✅ |
-| Unused dependency cleanup | ✅ |
-| Deprecation fixes | ✅ |
-| Constant expander hardening + tests | ✅ |
-| Hex constant support + tests | ✅ |
-| Clippy-clean codebase | ✅ |
-
-### Phase 3 — CI/CD
-
-| Feature | Status |
-|---------|--------|
-| GitHub Actions CI (test/clippy/fmt) | ✅ |
-| Multi-platform release workflow | ✅ |
-| Dependabot dependency updates | ❌ |
-
-### Phase 4 — Core LSP Features
-
-| Feature | Status |
-|---------|--------|
-| Diagnostics (syntax error reporting) | ❌ |
-| Find references | ❌ |
-| Hierarchical document symbols | ❌ |
-| Improved completion (keywords + cross-file) | ❌ |
-
-### Phase 5 — Advanced LSP Features
-
-| Feature | Status |
-|---------|--------|
-| Semantic tokens (syntax highlighting) | ❌ |
-| Code folding | ✅ |
-| Code actions (quick fixes) | ❌ |
-| Signature help | ❌ |
-| Improved TextMate grammar | ❌ |
-| Incremental document sync | ❌ |
 
 ## Documentation
 
-- [CONTRIBUTING.md](CONTRIBUTING.md) — How to contribute
-- [CHANGELOG.md](CHANGELOG.md) — Version history
+- [FEATURES.md](docs/FEATURES.md) — Feature status and roadmap
+- [CONTRIBUTING.md](docs/CONTRIBUTING.md) — How to contribute
+- [CHANGELOG.md](docs/CHANGELOG.md) — Version history
 - [README.zh-CN.md](README.zh-CN.md) — 中文文档
-- [SECURITY.md](SECURITY.md) — Security policy
-- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) — Code of conduct
-- [AI-ASSISTED-DEVELOPMENT.md](AI-ASSISTED-DEVELOPMENT.md) — Development process notes
+- [SECURITY.md](docs/SECURITY.md) — Security policy
+- [CODE_OF_CONDUCT.md](docs/CODE_OF_CONDUCT.md) — Code of conduct
+- [AI-ASSISTED-DEVELOPMENT.md](docs/AI-ASSISTED-DEVELOPMENT.md) — Development process notes
 
 ## License
 
