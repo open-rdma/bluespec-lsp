@@ -1,5 +1,5 @@
 use crate::constant_expansion::{ConstantEvaluator, ConstantParser};
-use crate::{utils, BsvParser, SymbolTable};
+use crate::{diagnostics, utils, BsvParser, SymbolTable};
 use async_trait::async_trait;
 use log::{debug, info, warn};
 use std::collections::HashMap;
@@ -28,13 +28,21 @@ impl Backend {
     }
 
     async fn update_document(&self, uri: &Url, text: &str) -> crate::Result<()> {
-        // 保存文档内容
-        let mut documents = self.documents.write().await;
-        documents.insert(uri.clone(), text.to_string());
+        // Save document content, then release the lock before any .await calls.
+        {
+            let mut documents = self.documents.write().await;
+            documents.insert(uri.clone(), text.to_string());
+        }
 
-        // 解析文档并更新符号表
+        // Parse the document, update symbol table, and publish diagnostics.
         match self.parser.parse(text) {
             Ok(tree) => {
+                // Publish syntax diagnostics from the parse tree.
+                let diags = diagnostics::DiagnosticCollector::collect(&tree, text);
+                self.client
+                    .publish_diagnostics(uri.clone(), diags, None)
+                    .await;
+
                 let symbols = self.parser.extract_symbols(&tree, text);
                 let symbols_len = symbols.len();
 
@@ -49,6 +57,27 @@ impl Backend {
                 Ok(())
             }
             Err(e) => {
+                // Publish a fallback diagnostic when parsing fails entirely.
+                let diag = Diagnostic {
+                    range: Range {
+                        start: Position {
+                            line: 0,
+                            character: 0,
+                        },
+                        end: Position {
+                            line: 0,
+                            character: 0,
+                        },
+                    },
+                    severity: Some(DiagnosticSeverity::ERROR),
+                    source: Some("bsv".to_string()),
+                    message: format!("Failed to parse file: {}", e),
+                    ..Default::default()
+                };
+                self.client
+                    .publish_diagnostics(uri.clone(), vec![diag], None)
+                    .await;
+
                 warn!("Failed to parse {}: {}", uri, e);
                 Err(e)
             }

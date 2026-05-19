@@ -1,3 +1,4 @@
+pub mod diagnostics;
 mod errors;
 mod parser;
 mod server;
