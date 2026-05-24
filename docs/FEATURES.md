@@ -24,6 +24,7 @@
 | ⚙️ Language | Error recovery | ✅ | Symbol extraction from malformed code |
 | 🎨 Presentation | TextMate syntax highlighting | ✅ | Basic level |
 | ✏️ Editing | Formatting | ✅ | AST-guided line reformatting, 3-space indent |
+| 🧭 Navigation | Document Highlight | ✅ | Per-document symbol highlighting via SymbolTable |
 
 ## Planned Features
 
@@ -33,7 +34,6 @@
 | 🧭 Navigation | Go-to-Implementation | |
 | 🧭 Navigation | Call Hierarchy | Requires function call graph analysis |
 | 🧭 Navigation | Type Hierarchy | |
-| 🧭 Navigation | Document Highlight | Leverages existing references index |
 | ℹ️ Information | Signature Help | Function / method parameter extraction |
 | ✏️ Editing | Completion (cross-file) | Leverages existing SymbolTable |
 | ✏️ Editing | Code Actions | |

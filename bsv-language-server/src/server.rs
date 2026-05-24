@@ -230,6 +230,7 @@ impl LanguageServer for Backend {
                 workspace_symbol_provider: Some(OneOf::Left(true)),
                 hover_provider: Some(HoverProviderCapability::Simple(true)),
                 references_provider: Some(OneOf::Left(true)),
+                document_highlight_provider: Some(OneOf::Left(true)),
                 document_formatting_provider: Some(OneOf::Left(true)),
                 document_range_formatting_provider: Some(OneOf::Left(true)),
                 completion_provider: Some(CompletionOptions {
@@ -641,6 +642,70 @@ impl LanguageServer for Backend {
         });
 
         Ok(Some(locations))
+    }
+
+    async fn document_highlight(
+        &self,
+        params: DocumentHighlightParams,
+    ) -> LspResult<Option<Vec<DocumentHighlight>>> {
+        let uri = params.text_document_position_params.text_document.uri;
+        let position = params.text_document_position_params.position;
+
+        debug!("Document highlight request: {} at {:?}", uri, position);
+
+        let symbol_table = self.symbol_table.read().await;
+
+        // Find the symbol name at cursor position (same logic as references).
+        let name_to_find: Option<String> = {
+            if let Some(sym) = symbol_table.find_symbol_at_position(&uri, position) {
+                Some(sym.name)
+            } else {
+                // Fallback: extract word at cursor from document text.
+                let documents = self.documents.read().await;
+                documents.get(&uri).and_then(|text| {
+                    let line = utils::get_line_content(text, position.line as usize)?;
+                    self.extract_word_at_position(line, position.character as usize)
+                })
+            }
+        };
+
+        let name = match name_to_find {
+            Some(n) => n,
+            None => return Ok(None),
+        };
+
+        let mut highlights: Vec<DocumentHighlight> = Vec::new();
+
+        // Add declaration sites as WRITE highlights
+        for symbol in symbol_table.find_symbol_by_name(&name) {
+            if symbol.uri.as_ref().is_some_and(|u| *u == uri) {
+                highlights.push(DocumentHighlight {
+                    range: symbol.range,
+                    kind: Some(DocumentHighlightKind::WRITE),
+                });
+            }
+        }
+
+        // Add reference sites as READ highlights
+        for reference in symbol_table.find_references_by_name(&name) {
+            if reference.uri.as_ref().is_some_and(|u| *u == uri) {
+                highlights.push(DocumentHighlight {
+                    range: reference.range,
+                    kind: Some(DocumentHighlightKind::READ),
+                });
+            }
+        }
+
+        // Sort by range for deterministic output
+        highlights.sort_by(|a, b| {
+            a.range
+                .start
+                .line
+                .cmp(&b.range.start.line)
+                .then_with(|| a.range.start.character.cmp(&b.range.start.character))
+        });
+
+        Ok(Some(highlights))
     }
 
     async fn formatting(
