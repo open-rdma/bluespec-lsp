@@ -66,58 +66,42 @@ static RE_KW_PAREN: LazyLock<Regex> = LazyLock::new(|| {
 });
 
 /// Insert space before `{` in struct literal contexts (e.g. `Foo{` -> `Foo {`).
-static RE_STRUCT_BRACE: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"(\w)\{").unwrap()
-});
+static RE_STRUCT_BRACE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(\w)\{").unwrap());
 
 /// Ensure `=` has spaces around it (but not `==`, `!=`, `<=`, `>=`).
 ///
 /// Uses a capture-group approach because Rust's `regex` crate does not
 /// support lookbehind assertions.  The pattern matches `=` preceded by
 /// a non-operator character and followed by a non-`=` character.
-static RE_EQ: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"([^!<>=])=([^=])").unwrap()
-});
+static RE_EQ: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"([^!<>=])=([^=])").unwrap());
 
 /// Ensure ` <- ` has spaces around it (connection / action operator).
 ///
 /// Uses capture groups to avoid lookbehind: captures non-whitespace on
 /// both sides and collapses any existing whitespace around the operator.
-static RE_LARROW: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"(\S)\s*<-\s*(\S)").unwrap()
-});
+static RE_LARROW: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(\S)\s*<-\s*(\S)").unwrap());
 
 /// Ensure ` <= ` has spaces around it (less-than-or-equal).
-static RE_LE: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"(\S)\s*<=\s*(\S)").unwrap()
-});
+static RE_LE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(\S)\s*<=\s*(\S)").unwrap());
 
 /// Ensure ` < ` has spaces around it (less-than), but NOT when `<` is
 /// followed by `=` (that's `<=`, already handled) or `-` (that would be
 /// the tail of `<-`, which was already handled by `RE_LARROW`).
 /// Uses `[^=\s-]` to exclude `=`, whitespace, and `-` after `<`.
-static RE_LT: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"(\w+)\s*<\s*(\w+)").unwrap()
-});
+static RE_LT: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(\w+)\s*<\s*(\w+)").unwrap());
 
 /// Ensure ` + ` has spaces around it, avoiding `++` (list concatenation).
 /// Uses `[^+]` capture groups (not lookahead, which `regex` lacks).
-static RE_PLUS: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"([^+])\+\s*([^+])").unwrap()
-});
+static RE_PLUS: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"([^+])\+\s*([^+])").unwrap());
 
 /// Ensure ` : ` after struct field names (e.g. `a:1` -> `a: 1`).
 /// Does not match `#(type)` or `::` contexts because those don't have
 /// `\w` immediately before `:`.
-static RE_COLON: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r"(\w):(\S)").unwrap()
-});
+static RE_COLON: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"(\w):(\S)").unwrap());
 
 /// Ensure ` ; ` has a space after it in for-loop headers and similar
 /// contexts (e.g. `i=0;i<10` -> `i = 0; i < 10`).
-static RE_SEMI: LazyLock<Regex> = LazyLock::new(|| {
-    Regex::new(r";(\S)").unwrap()
-});
+static RE_SEMI: LazyLock<Regex> = LazyLock::new(|| Regex::new(r";(\S)").unwrap());
 
 // ── Public API ──────────────────────────────────────────────────
 
@@ -399,35 +383,23 @@ impl BsvFormatter {
         s = RE_EQ.replace_all(&s, "$1 = $2").to_string();
 
         // 4. `<-`: ensure spaces
-        s = RE_LARROW
-            .replace_all(&s, "$1 <- $2")
-            .to_string();
+        s = RE_LARROW.replace_all(&s, "$1 <- $2").to_string();
 
         // 5. `<=`: ensure spaces
-        s = RE_LE
-            .replace_all(&s, "$1 <= $2")
-            .to_string();
+        s = RE_LE.replace_all(&s, "$1 <= $2").to_string();
 
         // 6. `<`: ensure spaces (but only after `<=` has been handled)
-        s = RE_LT
-            .replace_all(&s, "$1 < $2")
-            .to_string();
+        s = RE_LT.replace_all(&s, "$1 < $2").to_string();
 
         // 7. `+`: ensure spaces (avoid `++`)
-        s = RE_PLUS
-            .replace_all(&s, "$1 + $2")
-            .to_string();
+        s = RE_PLUS.replace_all(&s, "$1 + $2").to_string();
 
         // 8. `:`: ensure space after colon in struct fields (e.g. `a:1` -> `a: 1`)
-        s = RE_COLON
-            .replace_all(&s, "$1: $2")
-            .to_string();
+        s = RE_COLON.replace_all(&s, "$1: $2").to_string();
 
         // 9. `;`: ensure space after semicolons in for-loop headers
         //     (e.g. `i=0;i<10` -> `i=0; i<10`)
-        s = RE_SEMI
-            .replace_all(&s, "; $1")
-            .to_string();
+        s = RE_SEMI.replace_all(&s, "; $1").to_string();
 
         // Collapse multiple spaces (but preserve leading indentation).
         let trimmed = s.trim_start();
@@ -463,8 +435,7 @@ impl BsvFormatter {
     }
 }
 
-static RE_MULTI_SPACE: LazyLock<Regex> =
-    LazyLock::new(|| Regex::new(r"[ ]{2,}").unwrap());
+static RE_MULTI_SPACE: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"[ ]{2,}").unwrap());
 
 // ── Tests ───────────────────────────────────────────────────────
 

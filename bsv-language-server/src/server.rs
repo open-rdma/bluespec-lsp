@@ -737,11 +737,7 @@ impl LanguageServer for Backend {
                             character: 0,
                         },
                         end: Position {
-                            line: if line_count > 0 {
-                                line_count - 1
-                            } else {
-                                0
-                            },
+                            line: if line_count > 0 { line_count - 1 } else { 0 },
                             character: last_line_len,
                         },
                     },
