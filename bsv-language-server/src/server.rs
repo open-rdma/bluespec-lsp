@@ -1,5 +1,5 @@
 use crate::constant_expansion::{ConstantEvaluator, ConstantParser};
-use crate::{diagnostics, utils, BsvParser, SymbolTable};
+use crate::{diagnostics, formatter::BsvFormatter, utils, BsvParser, SymbolTable};
 use async_trait::async_trait;
 use log::{debug, info, warn};
 use std::collections::HashMap;
@@ -230,6 +230,8 @@ impl LanguageServer for Backend {
                 workspace_symbol_provider: Some(OneOf::Left(true)),
                 hover_provider: Some(HoverProviderCapability::Simple(true)),
                 references_provider: Some(OneOf::Left(true)),
+                document_formatting_provider: Some(OneOf::Left(true)),
+                document_range_formatting_provider: Some(OneOf::Left(true)),
                 completion_provider: Some(CompletionOptions {
                     resolve_provider: Some(false),
                     trigger_characters: Some(vec![".".to_string(), ":".to_string()]),
@@ -639,6 +641,78 @@ impl LanguageServer for Backend {
         });
 
         Ok(Some(locations))
+    }
+
+    async fn formatting(
+        &self,
+        params: DocumentFormattingParams,
+    ) -> LspResult<Option<Vec<TextEdit>>> {
+        let uri = params.text_document.uri;
+
+        debug!("Formatting request: {}", uri);
+
+        let documents = self.documents.read().await;
+        let text = match documents.get(&uri) {
+            Some(t) => t.clone(),
+            None => return Ok(None),
+        };
+        drop(documents);
+
+        let formatter = BsvFormatter::new();
+        match formatter.format(&text) {
+            Some(formatted) => {
+                // Compute the total range of the document.
+                let line_count = text.lines().count() as u32;
+                let last_line_len = text.lines().last().map(|l| l.len() as u32).unwrap_or(0);
+
+                Ok(Some(vec![TextEdit {
+                    range: Range {
+                        start: Position {
+                            line: 0,
+                            character: 0,
+                        },
+                        end: Position {
+                            line: if line_count > 0 {
+                                line_count - 1
+                            } else {
+                                0
+                            },
+                            character: last_line_len,
+                        },
+                    },
+                    new_text: formatted,
+                }]))
+            }
+            None => {
+                warn!("Formatter returned None (parse failed) for {}", uri);
+                Ok(None)
+            }
+        }
+    }
+
+    async fn range_formatting(
+        &self,
+        params: DocumentRangeFormattingParams,
+    ) -> LspResult<Option<Vec<TextEdit>>> {
+        let uri = params.text_document.uri;
+
+        debug!("Range formatting request: {} at {:?}", uri, params.range);
+
+        let documents = self.documents.read().await;
+        let text = match documents.get(&uri) {
+            Some(t) => t.clone(),
+            None => return Ok(None),
+        };
+        drop(documents);
+
+        let formatter = BsvFormatter::new();
+        match formatter.format(&text) {
+            Some(formatted) => Ok(Some(vec![TextEdit {
+                range: params.range,
+                new_text: formatted,
+            }])),
+            None => Ok(None),
+        }
     }
 }
 

@@ -23,6 +23,7 @@
 | ⚙️ Language | `#define` constant expansion | ✅ | Including type functions (TAdd, TSub, etc.) |
 | ⚙️ Language | Error recovery | ✅ | Symbol extraction from malformed code |
 | 🎨 Presentation | TextMate syntax highlighting | ✅ | Basic level |
+| ✏️ Editing | Formatting | ✅ | AST-guided line reformatting, 3-space indent |
 
 ## Planned Features
 
@@ -37,7 +38,6 @@
 | ✏️ Editing | Completion (cross-file) | Leverages existing SymbolTable |
 | ✏️ Editing | Code Actions | |
 | ✏️ Editing | Rename | Leverages existing references index |
-| ✏️ Editing | Formatting | Requires external formatter tool |
 | ✏️ Editing | Selection Range | Leverages existing AST traversal |
 | 📖 Semantic | Semantic Tokens | Advanced syntax highlighting |
 | 📖 Semantic | Inlay Hints | |
