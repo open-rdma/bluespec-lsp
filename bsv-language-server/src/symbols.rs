@@ -16,6 +16,18 @@ pub enum SymbolKind {
 }
 
 #[derive(Debug, Clone)]
+pub struct ParameterInfo {
+    pub name: String,
+    pub type_name: Option<String>,
+}
+
+impl ParameterInfo {
+    pub fn new(name: String, type_name: Option<String>) -> Self {
+        Self { name, type_name }
+    }
+}
+
+#[derive(Debug, Clone)]
 pub struct Symbol {
     pub name: String,
     pub kind: SymbolKind,
@@ -23,6 +35,7 @@ pub struct Symbol {
     pub uri: Option<Url>,
     pub container: Option<String>,
     pub documentation: Option<String>,
+    pub parameters: Vec<ParameterInfo>,
 }
 
 impl Symbol {
@@ -34,6 +47,7 @@ impl Symbol {
             uri: None,
             container: None,
             documentation: None,
+            parameters: Vec::new(),
         }
     }
 

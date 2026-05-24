@@ -34,7 +34,7 @@
 | 🧭 Navigation | Go-to-Implementation | |
 | 🧭 Navigation | Call Hierarchy | Requires function call graph analysis |
 | 🧭 Navigation | Type Hierarchy | |
-| ℹ️ Information | Signature Help | Function / method parameter extraction |
+| ℹ️ Information | Signature Help | ✅ | Function / method parameter extraction |
 | ✏️ Editing | Completion (cross-file) | Leverages existing SymbolTable |
 | ✏️ Editing | Code Actions | |
 | ✏️ Editing | Rename | Leverages existing references index |

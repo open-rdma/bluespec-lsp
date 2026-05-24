@@ -209,6 +209,22 @@ impl Backend {
 
         start
     }
+
+    /// Format a signature label like "funcName(type1 param1, type2 param2)".
+    fn format_signature_label(&self, symbol: &crate::Symbol) -> String {
+        if symbol.parameters.is_empty() {
+            return format!("{}()", symbol.name);
+        }
+        let params: Vec<String> = symbol
+            .parameters
+            .iter()
+            .map(|p| match &p.type_name {
+                Some(t) => format!("{} {}", t, p.name),
+                None => p.name.clone(),
+            })
+            .collect();
+        format!("{}({})", symbol.name, params.join(", "))
+    }
 }
 
 #[async_trait]
@@ -236,6 +252,11 @@ impl LanguageServer for Backend {
                 completion_provider: Some(CompletionOptions {
                     resolve_provider: Some(false),
                     trigger_characters: Some(vec![".".to_string(), ":".to_string()]),
+                    ..Default::default()
+                }),
+                signature_help_provider: Some(SignatureHelpOptions {
+                    trigger_characters: Some(vec!["(".to_string(), ",".to_string()]),
+                    retrigger_characters: Some(vec![",".to_string()]),
                     ..Default::default()
                 }),
                 ..Default::default()
@@ -580,6 +601,95 @@ impl LanguageServer for Backend {
         }
 
         Ok(Some(CompletionResponse::Array(items)))
+    }
+
+    async fn signature_help(
+        &self,
+        params: SignatureHelpParams,
+    ) -> LspResult<Option<SignatureHelp>> {
+        let uri = params.text_document_position_params.text_document.uri;
+        let position = params.text_document_position_params.position;
+
+        debug!("Signature help request: {} at {:?}", uri, position);
+
+        // Get the document text
+        let documents = self.documents.read().await;
+        let text = match documents.get(&uri) {
+            Some(t) => t.clone(),
+            None => return Ok(None),
+        };
+        drop(documents);
+
+        // Parse and detect call context
+        let tree = match self.parser.parse(&text) {
+            Ok(t) => t,
+            Err(_) => return Ok(None),
+        };
+
+        let call_context = match self.parser.find_call_context(&tree, &text, position) {
+            Some(c) => c,
+            None => return Ok(None),
+        };
+
+        debug!(
+            "Signature help: callable='{}', arg_index={}",
+            call_context.callable_name, call_context.argument_index
+        );
+
+        // Look up the callable in the symbol table
+        let symbol_table = self.symbol_table.read().await;
+        let symbols = symbol_table.find_symbol_by_name(&call_context.callable_name);
+
+        if symbols.is_empty() {
+            return Ok(None);
+        }
+
+        // Build signature information for each matching symbol
+        let mut signatures: Vec<SignatureInformation> = Vec::new();
+        for symbol in &symbols {
+            let label = self.format_signature_label(symbol);
+            let parameters: Vec<ParameterInformation> = symbol
+                .parameters
+                .iter()
+                .map(|param| {
+                    let param_text = match &param.type_name {
+                        Some(t) => format!("{} {}", t, param.name),
+                        None => param.name.clone(),
+                    };
+                    // Calculate offset within the full label string.
+                    // The label format is: "funcName(type1 param1, type2 param2)"
+                    // We need to find the param_text within the label.
+                    let label_start = label.find(&param_text);
+                    if let Some(start) = label_start {
+                        ParameterInformation {
+                            label: ParameterLabel::LabelOffsets([
+                                start as u32,
+                                (start + param_text.len()) as u32,
+                            ]),
+                            documentation: None,
+                        }
+                    } else {
+                        ParameterInformation {
+                            label: ParameterLabel::Simple(param_text),
+                            documentation: None,
+                        }
+                    }
+                })
+                .collect();
+
+            signatures.push(SignatureInformation {
+                label,
+                documentation: None,
+                parameters: Some(parameters),
+                active_parameter: None,
+            });
+        }
+
+        Ok(Some(SignatureHelp {
+            signatures,
+            active_signature: Some(0),
+            active_parameter: Some(call_context.argument_index as u32),
+        }))
     }
 
     async fn references(&self, params: ReferenceParams) -> LspResult<Option<Vec<Location>>> {

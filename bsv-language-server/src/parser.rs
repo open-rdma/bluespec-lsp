@@ -10,6 +10,15 @@ extern "C" {
     fn tree_sitter_bsv() -> *const std::ffi::c_void;
 }
 
+/// Result of detecting a function/method call context at a cursor position.
+#[derive(Debug, Clone)]
+pub struct CallContext {
+    /// Name of the function or method being called.
+    pub callable_name: String,
+    /// 0-based index of the argument the cursor is currently in.
+    pub argument_index: usize,
+}
+
 pub struct BsvParser {
     parser: Mutex<Parser>,
 }
@@ -206,6 +215,7 @@ impl BsvParser {
                             documentation: Some(
                                 "[Error recovery] Module definition with syntax errors".to_string(),
                             ),
+                            parameters: Vec::new(),
                         });
                     }
                 }
@@ -224,6 +234,7 @@ impl BsvParser {
                             uri: None,
                             container: None,
                             documentation: None,
+                            parameters: Vec::new(),
                         });
                     }
                 }
@@ -240,6 +251,7 @@ impl BsvParser {
             if let Some(name_node) = self.get_callable_name_node(node, source) {
                 if let Ok(name) = name_node.utf8_text(source.as_bytes()) {
                     if !name.is_empty() {
+                        let params = self.extract_callable_params(node, source);
                         symbols.push(crate::Symbol {
                             name: name.to_string(),
                             kind: if node.kind() == "methodDef" {
@@ -251,6 +263,7 @@ impl BsvParser {
                             uri: None,
                             container: None,
                             documentation: None,
+                            parameters: params,
                         });
                     }
                 }
@@ -275,6 +288,7 @@ impl BsvParser {
                                 uri: None,
                                 container: None,
                                 documentation: None,
+                                parameters: Vec::new(),
                             });
                         }
                     }
@@ -451,6 +465,7 @@ impl BsvParser {
                                 "[Error recovery] Module extracted from incomplete definition"
                                     .to_string(),
                             ),
+                            parameters: Vec::new(),
                         });
                     }
                 }
@@ -473,6 +488,7 @@ impl BsvParser {
                                 "[Error recovery] Module extracted from incomplete definition"
                                     .to_string(),
                             ),
+                            parameters: Vec::new(),
                         });
                     }
                 }
@@ -623,6 +639,7 @@ impl BsvParser {
                         documentation: Some(
                             "[Error recovery] Function extracted from ERROR node".to_string(),
                         ),
+                        parameters: Vec::new(),
                     });
                 }
             }
@@ -671,6 +688,7 @@ impl BsvParser {
                                     uri: None,
                                     container: None,
                                     documentation: Some("[Error recovery] Function extracted from variable declaration".to_string()),
+                                    parameters: Vec::new(),
                                 });
                             }
                         }
@@ -732,6 +750,291 @@ impl BsvParser {
         }
 
         None
+    }
+
+    // ── Signature Help: parameter extraction ────────────────────────────
+
+    /// Extract parameter information from a function or method definition node.
+    ///
+    /// For `functionDef`:
+    ///   functionDef → functionProto → functionType → functionFormals → functionFormal
+    ///   Each functionFormal is: type + identifier
+    ///
+    /// For `methodDef`:
+    ///   methodDef → methodFormals → methodFormal
+    ///   Each methodFormal is: optional(type) + identifier
+    fn extract_callable_params(&self, node: Node, source: &str) -> Vec<crate::ParameterInfo> {
+        let formals_node = if node.kind() == "functionDef" {
+            self.get_function_formals_node(node)
+        } else if node.kind() == "methodDef" {
+            self.get_method_formals_node(node)
+        } else {
+            return Vec::new();
+        };
+
+        let formals_node = match formals_node {
+            Some(n) => n,
+            None => return Vec::new(),
+        };
+
+        let mut params = Vec::new();
+        let mut cursor = formals_node.walk();
+        for child in formals_node.children(&mut cursor) {
+            let kind = child.kind();
+            // functionFormal: "type identifier" or functionProto
+            // methodFormal: "optional(type) identifier"
+            if kind == "functionFormal" || kind == "methodFormal" || kind == "subFunctionFormal" {
+                let param_info = self.extract_formal_param(child, source);
+                params.push(param_info);
+            }
+        }
+        params
+    }
+
+    /// Extract name and optional type from a single formal parameter node.
+    fn extract_formal_param(&self, node: Node, source: &str) -> crate::ParameterInfo {
+        // Walk children: type (optional for methodFormal) + identifier
+        let mut cursor = node.walk();
+        let mut type_name: Option<String> = None;
+        let mut param_name: Option<String> = None;
+
+        for child in node.children(&mut cursor) {
+            let kind = child.kind();
+            if kind == "type" || kind == "functionType" || kind == "subFunctionType" {
+                if let Ok(text) = child.utf8_text(source.as_bytes()) {
+                    type_name = Some(text.to_string());
+                }
+            } else if kind == "identifier" {
+                if let Ok(text) = child.utf8_text(source.as_bytes()) {
+                    param_name = Some(text.to_string());
+                }
+            }
+        }
+
+        crate::ParameterInfo::new(param_name.unwrap_or_default(), type_name)
+    }
+
+    /// Find the `functionFormals` node inside a `functionDef`.
+    fn get_function_formals_node<'a>(&self, node: Node<'a>) -> Option<Node<'a>> {
+        // functionDef → functionProto → functionType → functionFormals
+        if let Some(proto) = self.child_by_kind(node, "functionProto") {
+            if let Some(ft) = self.child_by_kind(proto, "functionType") {
+                return self.child_by_kind(ft, "functionFormals");
+            }
+        }
+        None
+    }
+
+    /// Find the `methodFormals` node inside a `methodDef`.
+    fn get_method_formals_node<'a>(&self, node: Node<'a>) -> Option<Node<'a>> {
+        self.child_by_kind(node, "methodFormals")
+    }
+
+    // ── Signature Help: call context detection ──────────────────────────
+
+    /// Detect whether the cursor is inside a function or method call, and if so,
+    /// determine the callable name and which argument the cursor is on.
+    ///
+    /// Walks up from the deepest node at the cursor position to find a
+    /// `functionCall` or `methodCall` ancestor, then counts commas in the
+    /// argument list up to the cursor to compute `argument_index`.
+    pub fn find_call_context(
+        &self,
+        tree: &Tree,
+        source: &str,
+        position: lsp_types::Position,
+    ) -> Option<CallContext> {
+        let root = tree.root_node();
+        let point = tree_sitter::Point {
+            row: position.line as usize,
+            column: position.character as usize,
+        };
+        let deepest = root.descendant_for_point_range(point, point)?;
+
+        // Walk up the tree to find a functionCall or methodCall ancestor.
+        let mut node: Option<Node> = Some(deepest);
+        while let Some(current) = node {
+            let kind = current.kind();
+            if kind == "functionCall" || kind == "methodCall" {
+                return self.extract_call_context(current, source, position);
+            }
+            node = current.parent();
+        }
+
+        None
+    }
+
+    /// Given a `functionCall` or `methodCall` node, extract the callable name
+    /// and compute the active argument index.
+    fn extract_call_context(
+        &self,
+        node: Node,
+        source: &str,
+        position: lsp_types::Position,
+    ) -> Option<CallContext> {
+        let kind = node.kind();
+        let callable_name = if kind == "functionCall" {
+            // functionCall → exprPrimary (the first child before '(')
+            self.get_function_call_name(node, source)?
+        } else if kind == "methodCall" {
+            // methodCall → exprPrimary '.' identifier '(' ... ')'
+            self.get_method_call_name(node, source)?
+        } else {
+            return None;
+        };
+
+        // Compute argument index by scanning the source text for commas
+        // between the opening '(' and the cursor position.
+        let argument_index = self.count_arguments_at_position(node, source, position);
+
+        Some(CallContext {
+            callable_name,
+            argument_index,
+        })
+    }
+
+    /// Extract the function name from a `functionCall` node.
+    ///
+    /// functionCall = exprPrimary '(' ... ')'
+    /// The first exprPrimary child that is an identifier is the function name.
+    fn get_function_call_name(&self, node: Node, source: &str) -> Option<String> {
+        let mut cursor = node.walk();
+        for child in node.children(&mut cursor) {
+            if child.kind() == "exprPrimary" {
+                // exprPrimary may directly be an identifier or contain one.
+                if let Ok(text) = child.utf8_text(source.as_bytes()) {
+                    let text = text.trim();
+                    // Simple identifier or dotted name — use the first identifier.
+                    // Also handle method-like calls like `obj.method(args)`.
+                    if !text.is_empty() && !text.starts_with('(') && !text.starts_with('\"') {
+                        return Some(text.to_string());
+                    }
+                }
+                // Try to find an identifier child
+                if let Some(ident) = self.find_identifier(child) {
+                    if let Ok(name) = ident.utf8_text(source.as_bytes()) {
+                        return Some(name.to_string());
+                    }
+                }
+            }
+        }
+        None
+    }
+
+    /// Extract the method name from a `methodCall` node.
+    ///
+    /// methodCall = exprPrimary '.' identifier '(' ... ')'
+    fn get_method_call_name(&self, node: Node, source: &str) -> Option<String> {
+        let mut cursor = node.walk();
+        let mut found_dot = false;
+        for child in node.children(&mut cursor) {
+            if child.kind() == "." {
+                found_dot = true;
+            } else if found_dot && child.kind() == "identifier" {
+                if let Ok(name) = child.utf8_text(source.as_bytes()) {
+                    return Some(name.to_string());
+                }
+            }
+        }
+        None
+    }
+
+    /// Count how many arguments have been typed so far by counting commas
+    /// between the opening '(' and the cursor position.
+    fn count_arguments_at_position(
+        &self,
+        node: Node,
+        source: &str,
+        position: lsp_types::Position,
+    ) -> usize {
+        let node_start = node.start_position();
+
+        // Find the opening '(' character position
+        // We search from the node's start row/column
+        let start_line = node_start.row;
+        let start_col = node_start.column;
+
+        // Find the open paren by scanning source
+        let source_str = if let Ok(s) = node.utf8_text(source.as_bytes()) {
+            s
+        } else {
+            return 0;
+        };
+
+        // Find the position of '(' in the node text
+        let open_paren_pos = match source_str.find('(') {
+            Some(pos) => pos,
+            None => return 0,
+        };
+
+        // The content between '(' and cursor, accounting for multi-line
+        let cursor_line = position.line as usize;
+        let cursor_col = position.character as usize;
+
+        // If cursor is on the same line as the open paren
+        if cursor_line == start_line {
+            let after_paren = if cursor_col > start_col + open_paren_pos + 1 {
+                &source_str[open_paren_pos + 1..cursor_col - start_col]
+            } else {
+                return 0; // Cursor is before or at '('
+            };
+            // Don't proceed if candidate argument segment is empty
+            if after_paren.is_empty() {
+                return 0;
+            }
+            // Count commas, but skip those inside nested parentheses
+            Self::count_top_level_commas(after_paren)
+        } else {
+            // Multi-line: scan from '(' to cursor position
+            // Get the text from start of node to cursor
+            let lines: Vec<&str> = source.lines().collect();
+            let mut arg_text = String::new();
+
+            // First line: from '(' to end of line
+            if start_line < lines.len() {
+                let first_line = lines[start_line];
+                if open_paren_pos + 1 < first_line.len() {
+                    arg_text.push_str(&first_line[open_paren_pos + 1..]);
+                }
+                arg_text.push('\n');
+            }
+
+            // Middle lines
+            for line_idx in (start_line + 1)..cursor_line {
+                if line_idx < lines.len() {
+                    arg_text.push_str(lines[line_idx]);
+                    arg_text.push('\n');
+                }
+            }
+
+            // Last line: up to cursor
+            if cursor_line < lines.len() {
+                let last_line = lines[cursor_line];
+                let end = if cursor_col <= last_line.len() {
+                    cursor_col
+                } else {
+                    last_line.len()
+                };
+                arg_text.push_str(&last_line[..end]);
+            }
+
+            Self::count_top_level_commas(&arg_text)
+        }
+    }
+
+    /// Count commas that are not inside nested parentheses.
+    fn count_top_level_commas(text: &str) -> usize {
+        let mut depth = 0;
+        let mut count = 0;
+        for ch in text.chars() {
+            match ch {
+                '(' | '{' | '[' => depth += 1,
+                ')' | '}' | ']' if depth > 0 => depth -= 1,
+                ',' if depth == 0 => count += 1,
+                _ => {}
+            }
+        }
+        count
     }
 
     // ── Reference extraction ──────────────────────────────────────────
@@ -1308,6 +1611,104 @@ endfunction
         let tree = parser.parse(source).expect("parse failed");
         let refs = parser.extract_references(&tree, source);
         assert_eq!(refs.len(), 0);
+    }
+
+    // ── Signature Help tests ──────────────────────────────────────────
+
+    #[test]
+    fn test_extract_function_params() {
+        let source =
+            "function Bit#(32) add(Bit#(32) a, Bit#(32) b);\n    return a + b;\nendfunction\n";
+        let parser = BsvParser::default();
+        let tree = parser.parse(source).expect("parse failed");
+        let symbols = parser.extract_symbols(&tree, source);
+
+        let add = symbols.iter().find(|s| s.name == "add").unwrap();
+        assert_eq!(add.parameters.len(), 2);
+        assert_eq!(add.parameters[0].name, "a");
+        assert_eq!(add.parameters[0].type_name, Some("Bit#(32)".to_string()));
+        assert_eq!(add.parameters[1].name, "b");
+        assert_eq!(add.parameters[1].type_name, Some("Bit#(32)".to_string()));
+    }
+
+    #[test]
+    fn test_extract_method_params() {
+        let source = "module mkTest();\n    method Bit#(32) get(Bit#(32) addr, Bit#(8) select);\n        return addr;\n    endmethod\nendmodule\n";
+        let parser = BsvParser::default();
+        let tree = parser.parse(source).expect("parse failed");
+        let symbols = parser.extract_symbols(&tree, source);
+
+        let get = symbols.iter().find(|s| s.name == "get").unwrap();
+        assert_eq!(get.parameters.len(), 2);
+        assert_eq!(get.parameters[0].name, "addr");
+        assert_eq!(get.parameters[0].type_name, Some("Bit#(32)".to_string()));
+        assert_eq!(get.parameters[1].name, "select");
+        assert_eq!(get.parameters[1].type_name, Some("Bit#(8)".to_string()));
+    }
+
+    #[test]
+    fn test_extract_function_no_params() {
+        let source = "function Bit#(32) getValue();\n    return 42;\nendfunction\n";
+        let parser = BsvParser::default();
+        let tree = parser.parse(source).expect("parse failed");
+        let symbols = parser.extract_symbols(&tree, source);
+
+        let func = symbols.iter().find(|s| s.name == "getValue").unwrap();
+        assert_eq!(func.parameters.len(), 0);
+    }
+
+    #[test]
+    fn test_find_call_context_function_call() {
+        let source =
+            "module mkTest();\n    rule r;\n        let x = add(val, 5);\n    endrule\nendmodule\n";
+        let parser = BsvParser::default();
+        let tree = parser.parse(source).expect("parse failed");
+
+        // Cursor at 'val' in add(val, 5) — line 2, character 18 (after 'add(')
+        let pos = lsp_types::Position {
+            line: 2,
+            character: 18,
+        };
+        let ctx = parser.find_call_context(&tree, source, pos);
+        assert!(ctx.is_some(), "Expected call context for function call");
+        if let Some(ctx) = ctx {
+            assert_eq!(ctx.callable_name, "add");
+            assert_eq!(ctx.argument_index, 0);
+        }
+    }
+
+    #[test]
+    fn test_find_call_context_arg_index() {
+        let source =
+            "module mkTest();\n    rule r;\n        let x = add(val, 5);\n    endrule\nendmodule\n";
+        let parser = BsvParser::default();
+        let tree = parser.parse(source).expect("parse failed");
+
+        // Cursor at '5' in add(val, 5) — line 2, character 24 (after the comma)
+        let pos = lsp_types::Position {
+            line: 2,
+            character: 24,
+        };
+        let ctx = parser.find_call_context(&tree, source, pos);
+        assert!(ctx.is_some(), "Expected call context for second argument");
+        if let Some(ctx) = ctx {
+            assert_eq!(ctx.callable_name, "add");
+            assert_eq!(ctx.argument_index, 1);
+        }
+    }
+
+    #[test]
+    fn test_count_top_level_commas() {
+        // No commas
+        assert_eq!(BsvParser::count_top_level_commas("42"), 0);
+        // Simple commas
+        assert_eq!(BsvParser::count_top_level_commas("a, b, c"), 2);
+        // Commas inside nested parens should be excluded
+        assert_eq!(BsvParser::count_top_level_commas("a, foo(b, c), d"), 2);
+        // Commas inside nested braces
+        assert_eq!(BsvParser::count_top_level_commas("a, {b, c}, d"), 2);
+        // Only top-level
+        assert_eq!(BsvParser::count_top_level_commas("foo(a, b, c)"), 0);
     }
 }
 
