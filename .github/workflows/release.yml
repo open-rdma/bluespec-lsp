@@ -10,17 +10,40 @@ jobs:
     strategy:
       matrix:
         include:
-          - os: windows-latest
-            target: x86_64-pc-windows-msvc
-            server_name: bsv-language-server.exe
-            vsix_suffix: win32-x64
-            rust_toolchain_target: x86_64-pc-windows-msvc
+          # Linux x86_64
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            server_name: bsv-language-server
+            vsix_suffix: linux-x64
+            rust_toolchain_target: x86_64-unknown-linux-gnu
 
+          # Linux ARM64 (native ARM runner)
+          - os: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-gnu
+            server_name: bsv-language-server
+            vsix_suffix: linux-arm64
+            rust_toolchain_target: aarch64-unknown-linux-gnu
+
+          # macOS Intel x86_64
+          - os: macos-13
+            target: x86_64-apple-darwin
+            server_name: bsv-language-server
+            vsix_suffix: darwin-x64
+            rust_toolchain_target: x86_64-apple-darwin
+
+          # macOS Apple Silicon ARM64
           - os: macos-latest
             target: aarch64-apple-darwin
             server_name: bsv-language-server
             vsix_suffix: darwin-arm64
             rust_toolchain_target: aarch64-apple-darwin
+
+          # Windows x86_64
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            server_name: bsv-language-server.exe
+            vsix_suffix: win32-x64
+            rust_toolchain_target: x86_64-pc-windows-msvc
 
     runs-on: ${{ matrix.os }}
     permissions:
@@ -126,8 +149,7 @@ jobs:
           - Symbol navigation (go-to-definition, document symbols)
           - Constant expansion with hover documentation
           - Syntax highlighting and error recovery
-          - Windows x86_64 native support
-          - macOS ARM64 (Apple Silicon) native support
+          - Linux x86_64, Linux ARM64, macOS Intel, macOS Apple Silicon, and Windows x86_64 native support
 
           ### Installation
           1. Download the `.vsix` file for your platform
@@ -136,9 +158,12 @@ jobs:
           4. Click "..." menu and select "Install from VSIX..."
           5. Select the downloaded file
 
-          ### Notes
-          - `bsv-language-server-win32-x64-*.vsix` → Windows x86_64
+          ### Platform Notes
+          - `bsv-language-server-linux-x64-*.vsix` → Linux x86_64
+          - `bsv-language-server-linux-arm64-*.vsix` → Linux ARM64
+          - `bsv-language-server-darwin-x64-*.vsix` → macOS Intel
           - `bsv-language-server-darwin-arm64-*.vsix` → macOS Apple Silicon
+          - `bsv-language-server-win32-x64-*.vsix` → Windows x86_64
         draft: false
         prerelease: false
         files: |
