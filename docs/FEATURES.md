@@ -25,6 +25,7 @@
 | 🎨 Presentation | TextMate syntax highlighting | ✅ | Basic level |
 | ✏️ Editing | Formatting | ✅ | AST-guided line reformatting, 3-space indent |
 | 🧭 Navigation | Document Highlight | ✅ | Per-document symbol highlighting via SymbolTable |
+| ℹ️ Information | Signature Help | ✅ | Function / method parameter hints |
 
 ## Planned Features
 
@@ -34,7 +35,6 @@
 | 🧭 Navigation | Go-to-Implementation | |
 | 🧭 Navigation | Call Hierarchy | Requires function call graph analysis |
 | 🧭 Navigation | Type Hierarchy | |
-| ℹ️ Information | Signature Help | ✅ | Function / method parameter extraction |
 | ✏️ Editing | Completion (cross-file) | Leverages existing SymbolTable |
 | ✏️ Editing | Code Actions | |
 | ✏️ Editing | Rename | Leverages existing references index |

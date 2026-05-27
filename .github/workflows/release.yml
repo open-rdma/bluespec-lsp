@@ -145,11 +145,19 @@ jobs:
         body: |
           ## BSV Language Server v${{ steps.get_version.outputs.version }}
 
-          ### Features
-          - Symbol navigation (go-to-definition, document symbols)
+          ### New in v0.0.2
+          - **Code Folding** — Fold/unfold BSV blocks (modules, rules, functions, interfaces, etc.)
+          - **LSP Diagnostics** — Real-time syntax error underlines with false-positive filtering
+          - **Find References** — Cross-file identifier usage tracking
+          - **Document Highlight** — Per-document symbol highlighting
+          - **Signature Help** — Function/method parameter hints as you type
+          - **BSV Code Formatter** — AST-guided line reformatting with 3-space indent
+          - **Multi-Platform Support** — Linux x86_64, Linux ARM64, macOS Intel, macOS Apple Silicon, Windows x86_64
+
+          ### Features (from v0.0.1)
+          - Symbol navigation (go-to-definition, document symbols, workspace symbols)
           - Constant expansion with hover documentation
           - Syntax highlighting and error recovery
-          - Linux x86_64, Linux ARM64, macOS Intel, macOS Apple Silicon, and Windows x86_64 native support
 
           ### Installation
           1. Download the `.vsix` file for your platform
